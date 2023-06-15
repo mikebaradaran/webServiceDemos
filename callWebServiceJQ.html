@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        function CallWebService() {
+            const wsURL = "http://localhost:52151/services/QAservice1.asmx/sayHi";
+            const wsData = "{'name':'bob'}";
+            $.ajax({
+                type: "post",
+                data: wsData,
+                url: wsURL,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) { OnSuccess(result.d); },
+                error: function (xhr, status, error) { OnFailure(error); }
+            });
+        }
+        function OnSuccess(result) {
+            if (result) {
+                alert(result);
+            }
+        }
+        function OnFailure(error) {
+            alert(error);
+        }
+    </script>
+</head>
+<body>
+    <button onclick="CallWebService()">Call</button>
+    
+</body>
+</html>
